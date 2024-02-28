@@ -1,3 +1,6 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+
 // 1- Creating a single element
 // const element = React.createElement("h1", {id : "heading"}, "Hello World from React!");
 
