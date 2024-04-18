@@ -1,4 +1,33 @@
-#heading{
-    color: red;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+*{
+    margin: 0;
+    padding: 0;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aqua;
+    padding: 10px 20px;
+}
+.searchbar input{
+    padding: 5px 30px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+.searchbar button{
+    padding: 5px;
+    border-radius: 10px;
+    background-color: bisque;
+    border: none;
+    background-color: #007bff;
+    cursor: pointer;
+    color: #fff
+}
+.logo img{
+    width: 50px;
+    border-radius: 5px;
+}
+.user img{
+    width: 40px;
 }

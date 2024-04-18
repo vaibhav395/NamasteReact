@@ -1,27 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-// 1- Creating a single element
-// const element = React.createElement("h1", {id : "heading"}, "Hello World from React!");
+const HeaderComponent = ()=>(
+    <header className="header">
+        <div className="logo">
+            <img src="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bG9nb3xlbnwwfHwwfHx8MA%3D%3D"/>
+        </div>
+        <div className="searchbar">
+            <input type="text" placeholder="Search...."/>
+            <button>Search</button>
+        </div>
+        <div className="user">
+            <img src="https://static-00.iconduck.com/assets.00/user-icon-2048x2048-ihoxz4vq.png"/>
+        </div>
+    </header>
+)
 
-// const root = ReactDOM.createRoot(document.getElementById("root"));
-// root.render(element);
-
-
-// 2 - Creating nested elements and siblings
-{/* <div id="parent">
-    <div id="child">
-        <h1>I am Main heading</h1>
-        <h2>I am Secondary heading</h2>
-    </div>
-</div> */}
-
-const parent = React.createElement("div", {id:"parent"}, [React.createElement("div", {id:"child"}, 
-[React.createElement("h1", {}, "I am main heading"), React.createElement("h2", {},"I am Secondary heading")]),
-
-React.createElement("div", {id:"child2"}, 
-[React.createElement("h1", {}, "I am main heading2"), React.createElement("h2", {},"I am Secondary heading2")])]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(parent);
+root.render(<HeaderComponent/>);
