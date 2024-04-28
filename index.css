@@ -44,3 +44,8 @@
     flex-wrap: wrap;
     border: 2px solid red;
 }
+.filter{
+    cursor: pointer;
+    margin: 10px;
+    padding: 5px;
+}
