@@ -44,10 +44,10 @@
     flex-wrap: wrap;
     border: 2px solid red;
 }
-.filter{
+.filter-btn{
     cursor: pointer;
     margin: 10px;
-    padding: 5px;
+    /* padding: 2px; */
 }
 .shimmer-container{
     display: flex;
@@ -64,5 +64,10 @@
     padding: 0 10px;
     margin-right: 10px;
     cursor: pointer;
-
+}
+.filter{
+    display: flex;
+}
+.search{
+    margin: 10px;
 }
