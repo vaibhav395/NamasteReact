@@ -14,13 +14,17 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.2808422&lng=77.9960572&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.2808422&lng=77.9960572&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
     );
     const json = await data.json();
     console.log(json);
 
-    setlistofrestaurant(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
-    setfilteredListofrestaurant(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants);
+    setlistofrestaurant(
+      json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+    );
+    setfilteredListofrestaurant(
+      json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+    );
   };
 
   //Conditional Rendering
@@ -40,7 +44,7 @@ const Body = () => {
               setsearchText(e.target.value);
             }}
           />
-          <button
+          <button className="searchbtn"
             onClick={() => {
               const filteredListSearch = listofRestaurant.filter((res) => {
                 return res.info.name
