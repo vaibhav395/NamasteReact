@@ -2,6 +2,7 @@ import resList from "../utils/mockdata";
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [listofRestaurant, setlistofrestaurant] = useState([]);
@@ -14,16 +15,16 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.2808422&lng=77.9960572&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.2808422&lng=77.9960572&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     console.log(json);
 
     setlistofrestaurant(
-      json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setfilteredListofrestaurant(
-      json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
 
@@ -44,7 +45,8 @@ const Body = () => {
               setsearchText(e.target.value);
             }}
           />
-          <button className="searchbtn"
+          <button
+            className="searchbtn"
             onClick={() => {
               const filteredListSearch = listofRestaurant.filter((res) => {
                 return res.info.name
@@ -73,7 +75,14 @@ const Body = () => {
 
       <div className="res-container">
         {filteredListofRestaurant.map((restaurant) => {
-          return <RestaurantCard key={restaurant.info.id} {...restaurant} />;
+          return (
+            <Link
+              key={restaurant.info.id}
+              to={"/restaurants/" + restaurant.info.id}
+            >
+              <RestaurantCard {...restaurant} />
+            </Link>
+          );
         })}
 
         {/* <RestaurantCard {...resList[0]}/>
