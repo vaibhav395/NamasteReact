@@ -44,23 +44,23 @@ const Body = () => {
 
   return (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="p-4 m-4">
           <input
             type="text"
-            className="searchbox"
+            className="border border-solid border-black rounded-lg px-3 py-1"
             value={searchText}
             onChange={(e) => {
               setsearchText(e.target.value);
             }}
-          />
+            /> 
           <button
-            className="searchbtn"
+            className="px-3 py-1 bg-blue-200 rounded-lg m-2"
             onClick={() => {
               const filteredListSearch = listofRestaurant.filter((res) => {
                 return res.info.name
                   .toLowerCase()
-                  .includes(searchText.toLowerCase());
+                  .includes(searchText.toLowerCase()); //Making both names to lowercase so that it matches
               });
               setfilteredListofrestaurant(filteredListSearch);
             }}
@@ -68,8 +68,9 @@ const Body = () => {
             Search
           </button>
         </div>
+        <div className="p-4 m-4">
         <button
-          className="filter-btn"
+          className="px-3 py-1 bg-blue-200 rounded-md m-2"
           onClick={() => {
             //filter of restaurants logic here
             const filteredList = listofRestaurant.filter((res) => {
@@ -80,9 +81,10 @@ const Body = () => {
         >
           Top Rated Restaurants
         </button>
+        </div>
       </div>
 
-      <div className="res-container">
+      <div className="res-container flex flex-wrap">
         {filteredListofRestaurant.map((restaurant) => {
           return (
             <Link
