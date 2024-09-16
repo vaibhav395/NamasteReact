@@ -1,15 +1,19 @@
 import resList from "../utils/mockdata";
-import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import RestaurantCard, {withpromotedlabel} from "./RestaurantCard";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [listofRestaurant, setlistofrestaurant] = useState([]);
   const [filteredListofRestaurant, setfilteredListofrestaurant] = useState([]);
   const [searchText, setsearchText] = useState("");
   const onlineStatus = useOnlineStatus();
+
+  const PromotedRestaurantCard = withpromotedlabel(RestaurantCard);
+
 
   useEffect(() => {
     fetchData();
@@ -41,6 +45,8 @@ const Body = () => {
         <h1>Looks like you are offline, Please check your internet connection !!!</h1>
       )
     }
+
+    const data = useContext(UserContext);
 
   return (
     <div className="body">
@@ -82,6 +88,10 @@ const Body = () => {
           Top Rated Restaurants
         </button>
         </div>
+        <div className="p-4 m-4">
+          <label>User Name : </label>
+          <input className="px-3 py-1 rounded-md m-2 border border-black" onChange={(e)=>{data.setUserName(e.target.value)}}/>
+        </div>
       </div>
 
       <div className="res-container flex flex-wrap">
@@ -91,7 +101,7 @@ const Body = () => {
               key={restaurant.info.id}
               to={"/restaurants/" + restaurant.info.id}
             >
-              <RestaurantCard {...restaurant} />
+              {restaurant.info.avgRating>4 ? <PromotedRestaurantCard {...restaurant}/> : <RestaurantCard {...restaurant}/>}
             </Link>
           );
         })}
