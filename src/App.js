@@ -5,16 +5,20 @@ import Body from "./components/Body";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
+import Cart from "./components/Cart";
 import MenuRestaurant from "./components/MenuRestaurant";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Shimmer from "./components/Shimmer";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appstore from "./utils/appStore";
 
 const Grocery = lazy(()=> import("./components/Grocery"));
 
 const AppLayout = () => {
   const [userName, setUserName] = useState("Vaibhav Thareja");
   return (
+    <Provider store={appstore}>
     <UserContext.Provider value={{loggedInUser:userName, setUserName}}> 
     {/* Here in above line, we are overriding the default value of the context */}
     <div>
@@ -22,6 +26,7 @@ const AppLayout = () => {
       <Outlet />
     </div>
     </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -45,6 +50,10 @@ const appRouter = createBrowserRouter([
       {
         path:"/restaurants/:resId",
         element:<MenuRestaurant/>
+      },
+      {
+        path:"/cart",
+        element:<Cart/>
       },
       {
         path:"/grocery",

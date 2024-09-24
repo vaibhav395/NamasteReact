@@ -1,5 +1,16 @@
 // import { URL_RESTAURANTCARD_IMG } from "../utils/constant";
+
+
+import { addItem } from "../utils/cartSlice"
+
+import { useDispatch } from "react-redux";
+
 const ItemList = ({items})=>{
+
+    const dispatch = useDispatch();
+    const handleClick = (item)=>{
+        dispatch(addItem(item));
+    }
     
     return(
         <div>
@@ -15,8 +26,8 @@ const ItemList = ({items})=>{
                             <div>
                                 {item.card.info.imageId ? <>
                                 <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_300,h_300,c_fit/"+item.card.info.imageId} className="w-32 rounded-lg" />
-                               <button className="relative bg-gray-300 p-1 rounded-md text-sm">Add to Cart</button>
-                               </> : <button className="relative bg-gray-300 p-1 rounded-md text-sm">Add to Cart</button>  }
+                               <button className="relative bg-gray-300 p-1 rounded-md text-sm" onClick={()=>handleClick(item)}>Add to Cart</button>
+                               </> : <button className="relative bg-gray-300 p-1 rounded-md text-sm" onClick={()=>{handleClick(item)}}>Add to Cart</button>  }
                                
                             </div>
                         </div>

@@ -11,6 +11,7 @@ const Body = () => {
   const [filteredListofRestaurant, setfilteredListofrestaurant] = useState([]);
   const [searchText, setsearchText] = useState("");
   const onlineStatus = useOnlineStatus();
+  const data = useContext(UserContext);
 
   const PromotedRestaurantCard = withpromotedlabel(RestaurantCard);
 
@@ -46,7 +47,7 @@ const Body = () => {
       )
     }
 
-    const data = useContext(UserContext);
+    
 
   return (
     <div className="body">
