@@ -22,10 +22,11 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.2808422&lng=77.9960572&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      // "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.2808422&lng=77.9960572&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.3164945&lng=78.03219179999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log(json);
+    // console.log(json);
 
     setlistofrestaurant(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -35,8 +36,8 @@ const Body = () => {
     );
   };
 
-  //Conditional Rendering
-  if (listofRestaurant.length === 0) {
+  // Conditional Rendering
+  if (listofRestaurant?.length === 0) {
     return <Shimmer />;
   }
 
@@ -55,6 +56,7 @@ const Body = () => {
         <div className="p-4 m-4">
           <input
             type="text"
+            data-testid="searchInput"
             className="border border-solid border-black rounded-lg px-3 py-1"
             value={searchText}
             onChange={(e) => {
@@ -64,7 +66,7 @@ const Body = () => {
           <button
             className="px-3 py-1 bg-blue-200 rounded-lg m-2"
             onClick={() => {
-              const filteredListSearch = listofRestaurant.filter((res) => {
+              const filteredListSearch = listofRestaurant?.filter((res) => {
                 return res.info.name
                   .toLowerCase()
                   .includes(searchText.toLowerCase()); //Making both names to lowercase so that it matches
@@ -96,13 +98,13 @@ const Body = () => {
       </div>
 
       <div className="res-container flex flex-wrap">
-        {filteredListofRestaurant.map((restaurant) => {
+        {filteredListofRestaurant?.map((restaurant) => {
           return (
             <Link
               key={restaurant.info.id}
               to={"/restaurants/" + restaurant.info.id}
             >
-              {restaurant.info.avgRating>4 ? <PromotedRestaurantCard {...restaurant}/> : <RestaurantCard {...restaurant}/>}
+              {restaurant.info.avgRating>4 ? <PromotedRestaurantCard resData = {restaurant?.info}/> : <RestaurantCard resData = {restaurant?.info}/>}
             </Link>
           );
         })}

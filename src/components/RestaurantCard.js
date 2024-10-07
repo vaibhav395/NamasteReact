@@ -1,9 +1,14 @@
 import { URL_RESTAURANTCARD_IMG } from "../utils/constant";
-const RestaurantCard = (props) => {
+
+const RestaurantCard = ({resData}) => {
   const { cloudinaryImageId, name, cuisines, costForTwo, avgRating } =
-    props?.info; //Good practice at industry level
+    resData; 
+
+    
+
+
   return (
-    <div className="m-4 p-4 w-[250px] rounded-lg bg-gray-200 hover:bg-gray-300 h-[475px]">
+    <div data-testid="resCard" className="m-4 p-4 w-[250px] rounded-lg bg-gray-200 hover:bg-gray-300 h-[475px]">
       <img
         className="res-logo rounded-md"
         alt="res-logo"
@@ -18,11 +23,11 @@ const RestaurantCard = (props) => {
 };
 
 export const withpromotedlabel = (RestaurantCard)=>{
-  return (props)=>{
+  return ({resData})=>{
     return(
       <div>
         <label className="absolute bg-slate-700 text-white m-2 px-2 py-1 rounded-lg">Promoted</label>
-        <RestaurantCard {...props}/>
+        <RestaurantCard resData = {resData}/>
       </div>
     )
   }
