@@ -1,5 +1,5 @@
 import resList from "../utils/mockdata";
-import RestaurantCard, {withpromotedlabel} from "./RestaurantCard";
+import RestaurantCard, { withpromotedlabel } from "./RestaurantCard";
 import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -14,7 +14,6 @@ const Body = () => {
   const data = useContext(UserContext);
 
   const PromotedRestaurantCard = withpromotedlabel(RestaurantCard);
-
 
   useEffect(() => {
     fetchData();
@@ -41,35 +40,36 @@ const Body = () => {
     return <Shimmer />;
   }
 
-  if(onlineStatus===false)
-    {
-      return (
-        <h1>Looks like you are offline, Please check your internet connection !!!</h1>
-      )
-    }
-
-    
+  if (onlineStatus === false) {
+    return (
+      <h1>
+        Looks like you are offline, Please check your internet connection !!!
+      </h1>
+    );
+  }
 
   return (
-    <div className="body">
-      <div className="filter flex">
-        <div className="p-4 m-4">
+    <div className="pl-8">
+      <div className="flex flex-wrap justify-center items-center p-4 space-x-4">
+        <div className="flex items-center bg-white shadow-lg rounded-lg p-4 transition-transform hover:shadow-xl hover:scale-105">
           <input
             type="text"
             data-testid="searchInput"
-            className="border border-solid border-black rounded-lg px-3 py-1"
+            className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
             value={searchText}
             onChange={(e) => {
               setsearchText(e.target.value);
             }}
-            /> 
+            placeholder="Search Restaurants..."
+          />
           <button
-            className="px-3 py-1 bg-blue-200 rounded-lg m-2"
+            className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+
             onClick={() => {
               const filteredListSearch = listofRestaurant?.filter((res) => {
                 return res.info.name
                   .toLowerCase()
-                  .includes(searchText.toLowerCase()); //Making both names to lowercase so that it matches
+                  .includes(searchText.toLowerCase());
               });
               setfilteredListofrestaurant(filteredListSearch);
             }}
@@ -77,41 +77,54 @@ const Body = () => {
             Search
           </button>
         </div>
-        <div className="p-4 m-4">
-        <button
-          className="px-3 py-1 bg-blue-200 rounded-md m-2"
-          onClick={() => {
-            //filter of restaurants logic here
-            const filteredList = listofRestaurant.filter((res) => {
-              return res.info.avgRating > 4.2;
-            });
-            setfilteredListofrestaurant(filteredList);
-          }}
-        >
-          Top Rated Restaurants
-        </button>
+
+        <div className="flex items-center bg-white shadow-lg rounded-lg p-4 transform hover:shadow-xl hover:scale-105">
+          <button
+            className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            onClick={() => {
+              const filteredList = listofRestaurant.filter((res) => {
+                return res.info.avgRating > 4.2;
+              });
+              setfilteredListofrestaurant(filteredList);
+            }}
+          >
+            Top Rated Restaurants
+          </button>
         </div>
-        <div className="p-4 m-4">
-          <label>User Name : </label>
-          <input className="px-3 py-1 rounded-md m-2 border border-black" onChange={(e)=>{data.setUserName(e.target.value)}}/>
+
+        <div className="flex items-center bg-white shadow-lg rounded-lg p-4 transition-transform transform hover:shadow-xl hover:scale-105">
+          <label className="mr-2 text-lg font-semibold">User Name:</label>
+          <input
+            className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
+            onChange={(e) => {
+              data.setUserName(e.target.value);
+            }}
+            placeholder="Enter your name"
+          />
         </div>
       </div>
 
-      <div className="res-container flex flex-wrap">
+      <div className="res-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-4">
         {filteredListofRestaurant?.map((restaurant) => {
           return (
             <Link
               key={restaurant.info.id}
               to={"/restaurants/" + restaurant.info.id}
+              className="hover:scale-105"
             >
-              {restaurant.info.avgRating>4 ? <PromotedRestaurantCard resData = {restaurant?.info}/> : <RestaurantCard resData = {restaurant?.info}/>}
+              {restaurant.info.avgRating > 4.2 ? (
+                <PromotedRestaurantCard resData={restaurant?.info} />
+              ) : (
+                <RestaurantCard resData={restaurant?.info} />
+              )}
             </Link>
           );
         })}
 
-        {/* <RestaurantCard {...resList[0]}/>
-          <RestaurantCard {...resList[1]}/>
-          <RestaurantCard {...resList[2]}/> */}
+        {/* Sample Cards (Uncomment if needed) */}
+        {/* <RestaurantCard {...resList[0]} />
+      <RestaurantCard {...resList[1]} />
+      <RestaurantCard {...resList[2]} /> */}
       </div>
     </div>
   );

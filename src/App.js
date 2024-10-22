@@ -12,6 +12,8 @@ import Shimmer from "./components/Shimmer";
 import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
 import appstore from "./utils/appStore";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Grocery = lazy(()=> import("./components/Grocery"));
 
@@ -24,6 +26,7 @@ const AppLayout = () => {
     <div>
       <Header />
       <Outlet />
+      <ToastContainer/>
     </div>
     </UserContext.Provider>
     </Provider>

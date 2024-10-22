@@ -8,9 +8,9 @@ const RestaurantCard = ({resData}) => {
 
 
   return (
-    <div data-testid="resCard" className="m-4 p-4 w-[250px] rounded-lg bg-gray-200 hover:bg-gray-300 h-[475px]">
+    <div data-testid="resCard" className="m-4 p-4 w-[250px] rounded-lg bg-gray-200 hover:bg-gray-300 h-[430px]">
       <img
-        className="res-logo rounded-md"
+        className="res-logo rounded-md w-full h-[200px]"
         alt="res-logo"
         src={URL_RESTAURANTCARD_IMG + cloudinaryImageId}
       />

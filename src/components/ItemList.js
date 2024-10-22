@@ -2,14 +2,21 @@
 
 
 import { addItem } from "../utils/cartSlice"
-
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+// import 'react-toastify/dist/ReactToastify.css';
 
 const ItemList = ({items})=>{
 
     const dispatch = useDispatch();
     const handleClick = (item)=>{
         dispatch(addItem(item));
+
+        toast.success(
+            <div className="flex items-center">
+              Item added to Cart Successfully!
+            </div>
+          );
     }
     
     return(
